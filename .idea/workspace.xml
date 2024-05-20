@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1ad0a96-67c2-4458-8c82-2429c8e8f372" name="Changes" comment="add_ added is_mined method for checking if a cell is mined">
-      <change beforePath="$PROJECT_DIR$/minesweeper/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/minesweeper/model.py" afterDir="false" />
-    </list>
+    <list default="true" id="a1ad0a96-67c2-4458-8c82-2429c8e8f372" name="Changes" comment="add_game_over" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -145,7 +143,31 @@
       <option name="project" value="LOCAL" />
       <updated>1716230467975</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add_game_status">
+      <option name="closed" value="true" />
+      <created>1716230805126</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1716230805126</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add_game_status">
+      <option name="closed" value="true" />
+      <created>1716230813006</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1716230813006</updated>
+    </task>
+    <task id="LOCAL-00012" summary="add_game_over">
+      <option name="closed" value="true" />
+      <created>1716231136944</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1716231136944</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -178,6 +200,8 @@
     <MESSAGE value="add_open_neighbors" />
     <MESSAGE value="add_ opening a single neighbor cell" />
     <MESSAGE value="add_ added is_mined method for checking if a cell is mined" />
-    <option name="LAST_COMMIT_MESSAGE" value="add_ added is_mined method for checking if a cell is mined" />
+    <MESSAGE value="add_game_status" />
+    <MESSAGE value="add_game_over" />
+    <option name="LAST_COMMIT_MESSAGE" value="add_game_over" />
   </component>
 </project>

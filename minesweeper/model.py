@@ -190,3 +190,14 @@ class Model:
 				elif not cell.mined and cell.state == "flagged":
 					cell.int_state = 14
 
+	def next_mark(self, x, y):
+		if not self.stop_game:
+			cell = self.get_cell(x, y)
+			old_state = cell.state
+			cell.next_mark()
+			if cell.state == "flagged":
+				self.flagged_cells += 1
+			else:
+				if old_state == "flagged":
+					self.flagged_cells -= 1
+
