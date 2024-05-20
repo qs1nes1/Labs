@@ -78,3 +78,33 @@ class Model:
 			if not self.field[_y][_x].mined:
 				mines_ammout += 1
 				self.field[_y][_x].mined = True
+
+	def get_cell(self, x, y):
+		return self.field[y][x]
+
+	def open_cell(self, x, y):
+		if not self.stop_game:
+			if self.first_click:
+				self.contoller.create_timer()
+				self.first_click = False
+			cell = self.get_cell(x, y)
+			# Check if the cell is not mined.
+			last_state = cell.state
+			cell.open()
+			if cell.state == "opened" and last_state != cell.state:
+				self.open_cells += 1
+				self.checked = []
+				if not cell.mined:
+					mines_number = self.check_neighbors(cell)
+					cell.int_state = mines_number
+			if cell.state == "opened":
+				if cell.mined:
+					# If this cell was mined game over.
+					cell.state = "opened"
+					self.is_game_over = True
+					self.stop_game = True
+				else:
+					pass
+
+			if self.is_game_over:
+				self.game_over()
