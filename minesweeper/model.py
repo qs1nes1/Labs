@@ -124,3 +124,13 @@ class Model:
 			self.open_neighbors(cell)
 			pass
 		return neighbors_mines
+
+	def open_neighbors(self, cell):
+		self.open_one_neighbor(cell, cell.x - 1, cell.y - 1)
+		self.open_one_neighbor(cell, cell.x, cell.y - 1)
+		self.open_one_neighbor(cell, cell.x + 1, cell.y - 1)
+		self.open_one_neighbor(cell, cell.x - 1, cell.y)
+		self.open_one_neighbor(cell, cell.x + 1, cell.y)
+		self.open_one_neighbor(cell, cell.x - 1, cell.y + 1)
+		self.open_one_neighbor(cell, cell.x, cell.y + 1)
+		self.open_one_neighbor(cell, cell.x + 1, cell.y + 1)
