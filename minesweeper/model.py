@@ -178,3 +178,15 @@ class Model:
 			self.contoller.set_win_button()
 			return "Win"
 		return "Game"
+
+	def game_over(self):
+		for row in self.field:
+			for cell in row:
+				if cell.mined and cell.state != "flagged":
+					if cell.state == "opened":
+						cell.int_state = 13
+					else:
+						cell.int_state = 12
+				elif not cell.mined and cell.state == "flagged":
+					cell.int_state = 14
+
