@@ -153,3 +153,17 @@ class Model:
 					cell.int_state = self.check_neighbors(cell)
 		except:
 			pass
+
+	def is_mined(self, old_cell, x, y):
+		try:
+			if old_cell.x == 0 and x == -1:
+				return False
+			if old_cell.x == self.FIELD_WIDTH - 1 and x == 1:
+				return False
+			if old_cell.y == 0 and y == -1:
+				return False
+			if old_cell.y == self.FIELD_HEIGHT - 1 and y == 1:
+				return False
+			return self.get_cell(x, y).mined
+		except:
+			return False
