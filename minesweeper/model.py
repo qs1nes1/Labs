@@ -108,3 +108,19 @@ class Model:
 
 			if self.is_game_over:
 				self.game_over()
+
+	def check_neighbors(self, cell):
+		neighbors_mines = 0
+		self.checked.append(cell)
+		if self.is_mined(cell, cell.x - 1, cell.y - 1): neighbors_mines += 1
+		if self.is_mined(cell, cell.x, cell.y - 1): neighbors_mines += 1
+		if self.is_mined(cell, cell.x + 1, cell.y - 1): neighbors_mines += 1
+		if self.is_mined(cell, cell.x - 1, cell.y): neighbors_mines += 1
+		if self.is_mined(cell, cell.x + 1, cell.y): neighbors_mines += 1
+		if self.is_mined(cell, cell.x - 1, cell.y + 1): neighbors_mines += 1
+		if self.is_mined(cell, cell.x, cell.y + 1): neighbors_mines += 1
+		if self.is_mined(cell, cell.x + 1, cell.y + 1): neighbors_mines += 1
+		if neighbors_mines == 0:
+			self.open_neighbors(cell)
+			pass
+		return neighbors_mines
