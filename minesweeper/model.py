@@ -134,3 +134,22 @@ class Model:
 		self.open_one_neighbor(cell, cell.x - 1, cell.y + 1)
 		self.open_one_neighbor(cell, cell.x, cell.y + 1)
 		self.open_one_neighbor(cell, cell.x + 1, cell.y + 1)
+
+	def open_one_neighbor(self, old_cell, x, y):
+		try:
+			if old_cell.x == 0 and x == -1:
+				return False
+			if old_cell.x == self.FIELD_WIDTH - 1 and x == 1:
+				return False
+			if old_cell.y == 0 and y == -1:
+				return False
+			if old_cell.y == self.FIELD_HEIGHT - 1 and y == 1:
+				return False
+			cell = self.get_cell(x, y)
+			if cell.state != "opened":
+				cell.open()
+				self.open_cells += 1
+				if cell not in self.checked:
+					cell.int_state = self.check_neighbors(cell)
+		except:
+			pass
