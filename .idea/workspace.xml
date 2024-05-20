@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1ad0a96-67c2-4458-8c82-2429c8e8f372" name="Changes" comment="add_game_over" />
+    <list default="true" id="a1ad0a96-67c2-4458-8c82-2429c8e8f372" name="Changes" comment="add_next_mark" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -167,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716231136944</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add_next_mark">
+      <option name="closed" value="true" />
+      <created>1716231354454</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1716231354454</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,6 +210,7 @@
     <MESSAGE value="add_ added is_mined method for checking if a cell is mined" />
     <MESSAGE value="add_game_status" />
     <MESSAGE value="add_game_over" />
-    <option name="LAST_COMMIT_MESSAGE" value="add_game_over" />
+    <MESSAGE value="add_next_mark" />
+    <option name="LAST_COMMIT_MESSAGE" value="add_next_mark" />
   </component>
 </project>
