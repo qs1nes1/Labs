@@ -167,3 +167,14 @@ class Model:
 			return self.get_cell(x, y).mined
 		except:
 			return False
+
+	def game_status(self):
+		if self.is_game_over:
+			self.contoller.stop_timer()
+			return "Lose"
+		if self.must_open_cells <= self.open_cells:
+			self.stop_game = True
+			self.contoller.stop_timer()
+			self.contoller.set_win_button()
+			return "Win"
+		return "Game"
