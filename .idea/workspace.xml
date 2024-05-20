@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1ad0a96-67c2-4458-8c82-2429c8e8f372" name="Changes" comment="add_ opening a single neighbor cell">
+    <list default="true" id="a1ad0a96-67c2-4458-8c82-2429c8e8f372" name="Changes" comment="add_ added is_mined method for checking if a cell is mined">
       <change beforePath="$PROJECT_DIR$/minesweeper/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/minesweeper/model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,7 +137,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716230046602</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add_ added is_mined method for checking if a cell is mined">
+      <option name="closed" value="true" />
+      <created>1716230467975</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1716230467975</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -169,6 +177,7 @@
     <MESSAGE value="add_check_neighbors" />
     <MESSAGE value="add_open_neighbors" />
     <MESSAGE value="add_ opening a single neighbor cell" />
-    <option name="LAST_COMMIT_MESSAGE" value="add_ opening a single neighbor cell" />
+    <MESSAGE value="add_ added is_mined method for checking if a cell is mined" />
+    <option name="LAST_COMMIT_MESSAGE" value="add_ added is_mined method for checking if a cell is mined" />
   </component>
 </project>
