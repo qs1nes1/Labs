@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="a1ad0a96-67c2-4458-8c82-2429c8e8f372" name="Changes" comment="Added main application setup with MVC pattern">
       <change beforePath="$PROJECT_DIR$/.idea/Labs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Labs.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
+=======
+    <list default="true" id="a1ad0a96-67c2-4458-8c82-2429c8e8f372" name="Changes" comment="add_next_mark" />
+>>>>>>> new_branch
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,11 +28,16 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
+<<<<<<< HEAD
         <entry key="$PROJECT_DIR$" value="1" />
+=======
+        <entry key="$PROJECT_DIR$" value="master" />
+>>>>>>> new_branch
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
   "lastFilter": {
     "state": "OPEN",
@@ -41,6 +50,22 @@
     "accountId": "4a828b78-d252-4099-93cb-70d822811e0e"
   }
 }]]></component>
+=======
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;qs1nes1&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="0116a7d5-81ce-40f8-a09d-f39bba10997d" />
+        <option name="url" value="https://github.com/qs1nes1/Labs.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+>>>>>>> new_branch
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -50,14 +75,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;new__branch&quot;
+>>>>>>> new_branch
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -98,6 +131,7 @@
       <option name="project" value="LOCAL" />
       <updated>1715710377490</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00004" summary="Added main application setup with MVC pattern">
       <option name="closed" value="true" />
       <created>1716116783619</created>
@@ -107,6 +141,89 @@
       <updated>1716116783619</updated>
     </task>
     <option name="localTasksCounter" value="5" />
+=======
+    <task id="LOCAL-00004" summary="the_firs">
+      <option name="closed" value="true" />
+      <created>1715710505669</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1715710505669</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add_implement cell opening logic">
+      <option name="closed" value="true" />
+      <created>1716218937574</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1716218937574</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add_check_neighbors">
+      <option name="closed" value="true" />
+      <created>1716219713260</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1716219713260</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add_open_neighbors">
+      <option name="closed" value="true" />
+      <created>1716219959993</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1716219959993</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add_ opening a single neighbor cell">
+      <option name="closed" value="true" />
+      <created>1716230046602</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1716230046602</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add_ added is_mined method for checking if a cell is mined">
+      <option name="closed" value="true" />
+      <created>1716230467975</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1716230467975</updated>
+    </task>
+    <task id="LOCAL-00010" summary="add_game_status">
+      <option name="closed" value="true" />
+      <created>1716230805126</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1716230805126</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add_game_status">
+      <option name="closed" value="true" />
+      <created>1716230813006</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1716230813006</updated>
+    </task>
+    <task id="LOCAL-00012" summary="add_game_over">
+      <option name="closed" value="true" />
+      <created>1716231136944</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1716231136944</updated>
+    </task>
+    <task id="LOCAL-00013" summary="add_next_mark">
+      <option name="closed" value="true" />
+      <created>1716231354454</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1716231354454</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+>>>>>>> new_branch
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -114,7 +231,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="new_branch" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -122,7 +251,19 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="the_firs" />
+<<<<<<< HEAD
     <MESSAGE value="Added main application setup with MVC pattern" />
     <option name="LAST_COMMIT_MESSAGE" value="Added main application setup with MVC pattern" />
+=======
+    <MESSAGE value="add_implement cell opening logic" />
+    <MESSAGE value="add_check_neighbors" />
+    <MESSAGE value="add_open_neighbors" />
+    <MESSAGE value="add_ opening a single neighbor cell" />
+    <MESSAGE value="add_ added is_mined method for checking if a cell is mined" />
+    <MESSAGE value="add_game_status" />
+    <MESSAGE value="add_game_over" />
+    <MESSAGE value="add_next_mark" />
+    <option name="LAST_COMMIT_MESSAGE" value="add_next_mark" />
+>>>>>>> new_branch
   </component>
 </project>
