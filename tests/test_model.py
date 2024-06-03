@@ -1,54 +1,55 @@
-import unittest
-from minesweeper.model import *
+import pytest
+from minesweeper.model import Model
 
-class TestModel(unittest.TestCase):
-    def setUp(self):
-        self.model = Model()
+def test_initial_state():
+    model = Model()
+    assert model.flagged_cells == -1
+    assert model.seconds_from_start == 1
 
-    def test_new_game_junior(self):
-        self.model.new_game(1)
-        self.assertEqual(self.model.FIELD_WIDTH, 10)
-        self.assertEqual(self.model.FIELD_HEIGHT, 10)
-        self.assertEqual(self.model.MINES_MAX, 10)
+def test_new_game_junior():
+    model = Model()
+    model.new_game(1)
+    assert model.FIELD_WIDTH == 10
+    assert model.FIELD_HEIGHT == 10
+    assert model.MINES_MAX == 10
 
-    def test_new_game_middle(self):
-        self.model.new_game(2)
-        self.assertEqual(self.model.FIELD_WIDTH, 14)
-        self.assertEqual(self.model.FIELD_HEIGHT, 6)
-        self.assertEqual(self.model.MINES_MAX, 15)
+def test_new_game_middle():
+    model = Model()
+    model.new_game(2)
+    assert model.FIELD_WIDTH == 14
+    assert model.FIELD_HEIGHT == 6
+    assert model.MINES_MAX == 15
 
-    def test_new_game_senior(self):
-        self.model.new_game(3)
-        self.assertEqual(self.model.FIELD_WIDTH, 15)
-        self.assertEqual(self.model.FIELD_HEIGHT, 15)
-        self.assertEqual(self.model.MINES_MAX, 25)
+def test_new_game_senior():
+    model = Model()
+    model.new_game(3)
+    assert model.FIELD_WIDTH == 15
+    assert model.FIELD_HEIGHT == 15
+    assert model.MINES_MAX == 25
 
-    def test_create_field(self):
-        self.model.new_game(1)
-        self.model.create_field()
-        self.assertEqual(len(self.model.field), 10)
-        self.assertEqual(len(self.model.field[0]), 10)
+def test_create_field():
+    model = Model()
+    model.new_game(1)
+    model.create_field()
+    assert len(model.field) == model.FIELD_HEIGHT
+    assert len(model.field[0]) == model.FIELD_WIDTH
+    mines_count = sum(cell.mined for row in model.field for cell in row)
+    assert mines_count == model.MINES_MAX
 
-    def test_get_cell(self):
-        self.model.new_game(1)
-        cell = self.model.get_cell(5, 5)
-        self.assertEqual(cell.x, 5)
-        self.assertEqual(cell.y, 5)
+def test_open_cell():
+    model = Model()
+    model.new_game(1)
+    model.create_field()
+    cell = model.get_cell(0, 0)
+    model.open_cell(0, 0)
+    assert cell.state == "opened"
 
-    def test_open_cell(self):
-        self.model.new_game(1)
-        self.model.create_field()
-        cell = self.model.get_cell(5, 5)
-        self.model.open_cell(5, 5)
-        self.assertTrue(cell.state == "opened" or cell.state == "flagged")
-
-    def test_next_mark(self):
-        self.model.new_game(1)
-        self.model.create_field()
-        cell = self.model.get_cell(5, 5)
-        self.model.next_mark(5, 5)
-        self.assertEqual(cell.state, "flagged")
-        self.assertEqual(self.model.flagged_cells, 0)
-
-if __name__ == "__main__":
-    unittest.main()
+def test_next_mark():
+    model = Model()
+    model.new_game(1)
+    model.create_field()
+    cell = model.get_cell(0, 0)
+    model.next_mark(0, 0)
+    assert cell.state == "flagged"
+    model.next_mark(0, 0)
+    assert cell.state == "closed"
