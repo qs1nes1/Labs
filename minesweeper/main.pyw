@@ -1,18 +1,27 @@
+import pygame
 import sys
 
-from PyQt5.QtWidgets import QApplication
+# Инициализация Pygame
+pygame.init()
 
-from view import View
-from controller import Controller
-from model import Model
+# Настройки окна
+screen_size = (800, 600)
+screen = pygame.display.set_mode(screen_size)
+pygame.display.set_caption("Minesweeper")
 
+# Основной игровой цикл
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
-if __name__ == '__main__':
-	application = QApplication(sys.argv)
+    # Заполнение экрана цветом
+    screen.fill((255, 255, 255))
 
-	model = Model()
-	controller = Controller(model)
-	window = View(controller, model)
+    # Обновление экрана
+    pygame.display.flip()
 
-	window.show()
-	sys.exit(application.exec_())
+# Завершение Pygame
+pygame.quit()
+sys.exit()
