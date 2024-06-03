@@ -9,6 +9,7 @@ class View:
         self.screen = pygame.display.set_mode((800, 600))
         pygame.display.set_caption("Minesweeper")
         self.font = pygame.font.SysFont('Arial', 25)
+        self.cell_size = 30  # Размер ячейки
         self.update()
 
     def set_won(self):
@@ -23,13 +24,29 @@ class View:
         # Implement mines counter display in Pygame
         pass
 
+    def draw_cell(self, cell):
+        x = cell.x * self.cell_size
+        y = cell.y * self.cell_size
+        rect = pygame.Rect(x, y, self.cell_size, self.cell_size)
+
+        if cell.state == 'closed':
+            pygame.draw.rect(self.screen, (200, 200, 200), rect)
+        elif cell.state == 'opened':
+            pygame.draw.rect(self.screen, (255, 255, 255), rect)
+            if cell.int_state > 0:
+                text = self.font.render(str(cell.int_state), True, (0, 0, 0))
+                self.screen.blit(text, (x + 10, y + 5))
+        elif cell.state == 'flagged':
+            pygame.draw.rect(self.screen, (255, 255, 255), rect)
+            pygame.draw.circle(self.screen, (255, 0, 0), rect.center, self.cell_size // 4)
+
+        pygame.draw.rect(self.screen, (0, 0, 0), rect, 1)  # Граница ячейки
+
     def update(self):
-        # Update the game display
         self.screen.fill((255, 255, 255))
-        # Draw the game grid and other elements
-        # Example for drawing text:
-        text = self.font.render('Minesweeper', True, (0, 0, 0))
-        self.screen.blit(text, (10, 10))
+        for row in self.model.field:
+            for cell in row:
+                self.draw_cell(cell)
         pygame.display.flip()
 
 
@@ -44,12 +61,10 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:  # Left click
                 x, y = event.pos
-                # Call the controller's left click method
-                controller.left_click(x // cell_size, y // cell_size)
+                controller.left_click(x // view.cell_size, y // view.cell_size)
             elif event.button == 3:  # Right click
                 x, y = event.pos
-                # Call the controller's right click method
-                controller.right_click(x // cell_size, y // cell_size)
+                controller.right_click(x // view.cell_size, y // view.cell_size)
 
     view.update()
     clock.tick(30)
