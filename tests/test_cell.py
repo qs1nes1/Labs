@@ -1,60 +1,60 @@
-from unittest import TestCase
+import pytest
+from minesweeper.cell import Cell
 
-from minesweeper.cell import*
+def test_initial_state():
+    cell = Cell(0, 0)
+    assert cell.x == 0
+    assert cell.y == 0
+    assert cell.state == "closed"
+    assert not cell.mined
+    assert cell.int_state == 9
+    assert cell.counter == 0
 
+def test_open_cell():
+    cell = Cell(0, 0)
+    cell.open()
+    assert cell.state == "opened"
+    assert cell.int_state == 0
 
-class TestCell(TestCase):
+def test_open_flagged_cell():
+    cell = Cell(0, 0)
+    cell.state = "flagged"
+    cell.open()
+    assert cell.state == "flagged"
+    assert cell.int_state == 9
 
-	@classmethod
-	def setUpClass(cls):
-		cls.cell = Cell(5, 10)
+def test_open_disable_cell():
+    cell = Cell(0, 0)
+    cell.state = "disable"
+    cell.open()
+    assert cell.state == "disable"
+    assert cell.int_state == 9
 
-	def test_init(self):
-		self.assertEqual(self.cell.x, 5)
-		self.assertEqual(self.cell.y, 10)
+def test_next_mark():
+    cell = Cell(0, 0)
+    cell.next_mark()
+    assert cell.state == "flagged"
+    assert cell.int_state == 10
 
-	def test_open_state_is_flagged(self):
-		expected_state = "flagged"
-		self.cell.state = expected_state
-		self.cell.open()
-		self.assertEqual(self.cell.state, expected_state)
+    cell.next_mark()
+    assert cell.state == "questioned"
+    assert cell.int_state == 11
 
-	def test_open_state_is_opened(self):
-		expected_state = "opened"
-		self.cell.state = expected_state
-		self.cell.open()
-		self.assertEqual(self.cell.state, expected_state)
+    cell.next_mark()
+    assert cell.state == "closed"
+    assert cell.int_state == 9
 
-	def test_open_state_is_closed(self):
-		primary_state = "closed"
-		expected_state = "opened"
-		self.cell.state = primary_state
-		self.cell.open()
-		self.assertEqual(self.cell.state, expected_state)
+def test_next_mark_opened_cell():
+    cell = Cell(0, 0)
+    cell.state = "opened"
+    initial_int_state = cell.int_state
+    cell.next_mark()
+    assert cell.state == "opened"
+    assert cell.int_state == initial_int_state
 
-	def test_open_state_is_questioned(self):
-		primary_state = "questioned"
-		expected_state = "opened"
-		self.cell.state = primary_state
-		self.cell.open()
-		self.assertEqual(self.cell.state, expected_state)
-
-	def test_next_mark_state_is_opened(self):
-		primary_state = "opened"
-		self.cell.state = primary_state
-		self.cell.next_mark()
-		self.assertEqual(self.cell.state, primary_state)
-
-	def test_next_mark_state_is_closed(self):
-		primary_state = "closed"
-		expected_state = "flagged"
-		self.cell.state = primary_state
-		self.cell.next_mark()
-		self.assertEqual(self.cell.state, expected_state)
-
-	def test_next_mark_state_is_questioned(self):
-		primary_state = "questioned"
-		expected_state = "closed"
-		self.cell.state = primary_state
-		self.cell.next_mark()
-		self.assertEqual(self.cell.state, expected_state)
+def test_next_mark_disabled_cell():
+    cell = Cell(0, 0)
+    cell.state = "disable"
+    cell.next_mark()
+    assert cell.state == "disable"
+    assert cell.int_state == 9
