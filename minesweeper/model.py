@@ -2,8 +2,6 @@ import pygame
 from random import randint
 
 # Define constants for the screen width and height
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
 CELL_SIZE = 20
 
 class Cell:
@@ -44,9 +42,6 @@ class Model:
         ]
         levels[game_level]()
         self.create_field()
-
-    """TODO: Write test to find out when mines amounts
-       greater then spots."""
 
     def empty_func(self):
         """When player did not change game level
@@ -127,17 +122,24 @@ class Model:
     def check_neighbors(self, cell):
         neighbors_mines = 0
         self.checked.append(cell)
-        if self.is_mined(cell, cell.x - 1, cell.y - 1): neighbors_mines += 1
-        if self.is_mined(cell, cell.x, cell.y - 1): neighbors_mines += 1
-        if self.is_mined(cell, cell.x + 1, cell.y - 1): neighbors_mines += 1
-        if self.is_mined(cell, cell.x - 1, cell.y): neighbors_mines += 1
-        if self.is_mined(cell, cell.x + 1, cell.y): neighbors_mines += 1
-        if self.is_mined(cell, cell.x - 1, cell.y + 1): neighbors_mines += 1
-        if self.is_mined(cell, cell.x, cell.y + 1): neighbors_mines += 1
-        if self.is_mined(cell, cell.x + 1, cell.y + 1): neighbors_mines += 1
+        if self.is_mined(cell, cell.x - 1, cell.y - 1):
+            neighbors_mines += 1
+        if self.is_mined(cell, cell.x, cell.y - 1):
+            neighbors_mines += 1
+        if self.is_mined(cell, cell.x + 1, cell.y - 1):
+            neighbors_mines += 1
+        if self.is_mined(cell, cell.x - 1, cell.y):
+            neighbors_mines += 1
+        if self.is_mined(cell, cell.x + 1, cell.y):
+            neighbors_mines += 1
+        if self.is_mined(cell, cell.x - 1, cell.y + 1):
+            neighbors_mines += 1
+        if self.is_mined(cell, cell.x, cell.y + 1):
+            neighbors_mines += 1
+        if self.is_mined(cell, cell.x + 1, cell.y + 1):
+            neighbors_mines += 1
         if neighbors_mines == 0:
             self.open_neighbors(cell)
-            pass
         return neighbors_mines
 
     def open_neighbors(self, cell):
@@ -212,20 +214,3 @@ class Model:
             else:
                 if old_state == "flagged":
                     self.flagged_cells -= 1
-
-def draw_grid(screen, model):
-    for y in range(model.FIELD_HEIGHT):
-        for x in range(model.FIELD_WIDTH):
-            cell = model.get_cell(x, y)
-            rect = pygame.Rect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE)
-            pygame.draw.rect(screen, (200, 200, 200), rect, 1)
-            if cell.state == "opened":
-                if cell.mined:
-                    pygame.draw.circle(screen, (255, 0, 0), rect.center, CELL_SIZE // 4)
-                else:
-                    if cell.int_state > 0:
-                        font = pygame.font.SysFont(None, 24)
-                        text = font.render(str(cell.int_state), True, (0, 0, 0))
-                        screen.blit(text, text.get_rect(center=rect.center))
-            elif cell.state == "flagged":
-                pygame.draw.circle(screen, (0, 0, 255), rect.center, CELL_SIZE // 4)
