@@ -1,65 +1,66 @@
-import pygame
-from model import Model
-from view import View
-
 class Controller:
     """Controller class for the connection between Model and View."""
 
     def __init__(self, model):
         self.model = model
-        self.model.set_contoller(self)
+        self.model.set_controller(self)
 
-    def set_view(self, view):
+    def setView(self, view):
         self.view = view
 
     def left_click(self, x, y):
         self.model.open_cell(x, y)
+        self.view.update()
         status = self.get_status()
         if status == "Win":
-            self.view.set_won()
+            print("You won!")
         elif status == "Lose":
-            self.view.set_lost()
+            print("You lost!")
 
     def right_click(self, x, y):
         self.model.next_mark(x, y)
-        self.set_mines_board(self.model.MINES_MAX - self.model.flagged_cells)
+        self.view.update()
 
     def create_timer(self):
-        # Pygame timer can be set up here if needed
-        pass
+        self.view.top_box.top_panel.timer.run_timer()
 
     def stop_timer(self):
-        # Stop Pygame timer if implemented
-        pass
+        self.view.top_box.top_panel.timer.stop_timer()
 
     def clear_timer(self):
-        # Clear Pygame timer if implemented
-        pass
+        self.view.top_box.top_panel.timer.clear_timer()
 
     def set_start_button(self):
-        # Update start button in Pygame if needed
-        pass
+        self.view.update()
 
     def set_win_button(self):
-        # Update win button in Pygame if needed
-        pass
+        self.view.update()
 
     def set_mines_board(self, mines):
-        self.view.set_mines(mines)
+        self.view.update()
 
     def get_status(self):
         return self.model.game_status()
 
-    def start_new_game(self, level=1):
-        self.model.new_game(game_level=level)
+    def start_new_game(self):
+        self.model.new_game(game_level=1)
         self.view.update()
 
-    def set_fixed_size(self):
-        # Update view dimensions in Pygame if needed
-        pass
+    def start_new_game_smile(self):
+        self.model.new_game(game_level=0)
+        self.view.update()
 
-# Initialize the model, view, and controller
-model = Model()
-controller = Controller(model)
-view = View(controller, model)
-controller.set_view(view)
+    def start_new_game_junior(self):
+        self.model.new_game(game_level=1)
+        self.model.last_level = 1
+        self.view.update()
+
+    def start_new_game_middle(self):
+        self.model.new_game(game_level=2)
+        self.model.last_level = 2
+        self.view.update()
+
+    def start_new_game_senior(self):
+        self.model.new_game(game_level=3)
+        self.model.last_level = 3
+        self.view.update()

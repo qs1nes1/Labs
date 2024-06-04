@@ -1,28 +1,17 @@
 import pygame
-
+from minesweeper.model import Model
+from minesweeper.controller import Controller
+from minesweeper.constants import CELL_SIZE, mine_image, flag_image, mine_clicked_image, misflagged_image, blank_image, open_images, timer_images, smiley_image, smiley_won_image, smiley_lost_image
 
 class View:
     def __init__(self, controller, model):
         self.controller = controller
         self.model = model
         pygame.init()
-        self.screen = pygame.display.set_mode((800, 600))
+        self.screen = pygame.display.set_mode((model.FIELD_WIDTH * CELL_SIZE, model.FIELD_HEIGHT * CELL_SIZE))
         pygame.display.set_caption("Minesweeper")
         self.font = pygame.font.SysFont('Arial', 25)
-        self.cell_size = 30  # Размер ячейки
-        self.update()
-
-    def set_won(self):
-        # Implement win state display in Pygame
-        pass
-
-    def set_lost(self):
-        # Implement lose state display in Pygame
-        pass
-
-    def set_mines(self, mines):
-        # Implement mines counter display in Pygame
-        pass
+        self.cell_size = CELL_SIZE
 
     def draw_cell(self, cell):
         x = cell.x * self.cell_size
@@ -49,24 +38,30 @@ class View:
                 self.draw_cell(cell)
         pygame.display.flip()
 
+# Main game loop (example usage)
+if __name__ == "__main__":
+    model = Model()
+    controller = Controller(model)
+    view = View(controller, model)
+    controller.setView(view)
 
-# Main game loop
-running = True
-clock = pygame.time.Clock()
+    model.new_game(1)  # Начинаем новую игру на уровне 1
 
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:  # Left click
+    running = True
+    clock = pygame.time.Clock()
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
-                controller.left_click(x // view.cell_size, y // view.cell_size)
-            elif event.button == 3:  # Right click
-                x, y = event.pos
-                controller.right_click(x // view.cell_size, y // view.cell_size)
+                if event.button == 1:  # Left click
+                    controller.left_click(x // view.cell_size, y // view.cell_size)
+                elif event.button == 3:  # Right click
+                    controller.right_click(x // view.cell_size, y // view.cell_size)
 
-    view.update()
-    clock.tick(30)
+        view.update()
+        clock.tick(30)
 
-pygame.quit()
+    pygame.quit()

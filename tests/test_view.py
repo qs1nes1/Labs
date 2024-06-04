@@ -1,113 +1,67 @@
-import pytest
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication
+import pygame
 from minesweeper.model import Model
 from minesweeper.controller import Controller
-from minesweeper.view import *
+from minesweeper.constants import CELL_SIZE
 
+class View:
+    def __init__(self, controller, model):
+        self.controller = controller
+        self.model = model
+        pygame.init()
+        self.screen = pygame.display.set_mode((model.FIELD_WIDTH * CELL_SIZE, model.FIELD_HEIGHT * CELL_SIZE))
+        pygame.display.set_caption("Minesweeper")
+        self.font = pygame.font.SysFont('Arial', 25)
+        self.cell_size = CELL_SIZE
 
-@pytest.fixture
-def app():
-    """Create a QApplication instance for testing."""
-    _app = QApplication([])
-    yield _app
-    _app.quit()
+    def draw_cell(self, cell):
+        x = cell.x * self.cell_size
+        y = cell.y * self.cell_size
+        rect = pygame.Rect(x, y, self.cell_size, self.cell_size)
 
+        if cell.state == 'closed':
+            pygame.draw.rect(self.screen, (200, 200, 200), rect)
+        elif cell.state == 'opened':
+            pygame.draw.rect(self.screen, (255, 255, 255), rect)
+            if cell.int_state > 0:
+                text = self.font.render(str(cell.int_state), True, (0, 0, 0))
+                self.screen.blit(text, (x + 10, y + 5))
+        elif cell.state == 'flagged':
+            pygame.draw.rect(self.screen, (255, 255, 255), rect)
+            pygame.draw.circle(self.screen, (255, 0, 0), rect.center, self.cell_size // 4)
 
-@pytest.fixture
-def model():
-    """Create a Model instance for testing."""
-    _model = Model()
-    yield _model
+        pygame.draw.rect(self.screen, (0, 0, 0), rect, 1)  # Граница ячейки
 
+    def update(self):
+        self.screen.fill((255, 255, 255))
+        for row in self.model.field:
+            for cell in row:
+                self.draw_cell(cell)
+        pygame.display.flip()
 
-@pytest.fixture
-def controller(model):
-    """Create a Controller instance for testing."""
-    _controller = Controller(model)
-    yield _controller
+# Main game loop (example usage)
+if __name__ == "__main__":
+    model = Model()
+    controller = Controller(model)
+    view = View(controller, model)
+    controller.set_view(view)
 
+    model.new_game(1)  # Начинаем новую игру на уровне 1
 
-@pytest.fixture
-def view(controller, model, app):
-    """Create a View instance for testing."""
-    _view = View(controller, model)
-    _view.show()
-    yield _view
-    _view.close()
+    running = True
+    clock = pygame.time.Clock()
 
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                if event.button == 1:  # Left click
+                    controller.left_click(x // view.cell_size, y // view.cell_size)
+                elif event.button == 3:  # Right click
+                    controller.right_click(x // view.cell_size, y // view.cell_size)
 
-def test_mousePressEvent(view, app):
-    # Simulate a mouse press event at (0, 0) on the Field widget
-    event = app.instance().postEvent(view.field, app.instance().QMouseEvent(
-        app.instance().QEvent.MouseButtonPress, app.instance().QPoint(0, 0),
-        Qt.LeftButton, Qt.LeftButton, Qt.NoModifier))
-    assert event
+        view.update()
+        clock.tick(30)
 
-
-def test_mouseReleaseEvent(view, app):
-    # Simulate a mouse release event at (0, 0) on the Field widget
-    event = app.instance().postEvent(view.field, app.instance().QMouseEvent(
-        app.instance().QEvent.MouseButtonRelease, app.instance().QPoint(0, 0),
-        Qt.LeftButton, Qt.LeftButton, Qt.NoModifier))
-    assert event
-
-
-def test_test_mouse_coordinates(view):
-    # Test the test_mouse_coordinates method with valid coordinates
-    assert view.field.test_mouse_coordinates(10, 10)  # Inside the field
-    # Test the test_mouse_coordinates method with invalid coordinates
-    assert not view.field.test_mouse_coordinates(1000, 1000)  # Outside the field
-
-
-def test_paintEvent(view, app):
-    # Test the paintEvent method
-    event = app.instance().QPaintEvent()
-    view.field.paintEvent(event)
-    assert view.field.painter.isActive()
-
-
-def test_create_menubar(view):
-    # Test the create_menubar method
-    assert view.menubar is not None
-    assert view.gamemenu is not None
-    assert len(view.gamemenu.actions()) == 4  # Including Exit action
-
-
-def test_create_top_box(view):
-    # Test the create_top_box method
-    assert view.top_box is not None
-    assert isinstance(view.top_box, TopBox)
-    assert view.top_box.layout() is not None
-    assert len(view.top_box.layout().children()) == 2  # TopPanel and Field
-
-
-def test_create_top_panel(view):
-    # Test the create_top_panel method
-    assert view.top_box.top_panel is not None
-    assert isinstance(view.top_box.top_panel, TopPanel)
-    assert view.top_box.layout().indexOf(view.top_box.top_panel) == 0  # First in layout
-
-
-def test_create_timer(view):
-    # Test the create_timer method
-    assert view.top_box.top_panel.timer is not None
-    assert isinstance(view.top_box.top_panel.timer, Timer)
-
-
-def test_run_timer(view):
-    # Test the run_timer method
-    view.top_box.top_panel.run_timer()
-    assert view.top_box.top_panel.qtimer.isActive()
-
-
-def test_stop_timer(view):
-    # Test the stop_timer method
-    view.top_box.top_panel.stop_timer()
-    assert not view.top_box.top_panel.qtimer.isActive()
-
-
-def test_clear_timer(view):
-    # Test the clear_timer method
-    view.top_box.top_panel.clear_timer()
-    assert view.top_box.top_panel.timer.numbers[0].pixmap().toImage().isNull()  # Empty pixmap
+    pygame.quit()

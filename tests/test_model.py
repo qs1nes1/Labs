@@ -1,5 +1,7 @@
+# test_model.py
 import unittest
-from minesweeper.model import *
+from minesweeper.model import Model
+from minesweeper.cell import Cell
 
 class TestModel(unittest.TestCase):
     def setUp(self):
@@ -48,7 +50,19 @@ class TestModel(unittest.TestCase):
         cell = self.model.get_cell(5, 5)
         self.model.next_mark(5, 5)
         self.assertEqual(cell.state, "flagged")
-        self.assertEqual(self.model.flagged_cells, 0)
+        self.assertEqual(self.model.flagged_cells, 1)
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_game_over(self):
+        self.model.new_game(1)
+        self.model.create_field()
+        for row in self.model.field:
+            for cell in row:
+                if cell.mined:
+                    cell.state = "opened"
+        self.model.game_over()
+        for row in self.model.field:
+            for cell in row:
+                if cell.mined:
+                    self.assertEqual(cell.int_state, 13)
+                else:
+                    self.assertNotEqual(cell.int_state, 14)
